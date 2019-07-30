@@ -1,0 +1,37 @@
+<!-- Busuanzi Async -->
+<script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0" async></script>
+<!-- Busuanzi Offset -->
+<script>
+    var int = setInterval(fixCount, 50);
+
+    function fixCount() {
+        <% if (theme.busuanzi.site_pv.offset) { %>
+        var $$bsz_site_container_pv = document.getElementById('busuanzi_container_site_pv');
+        var $$bsz_site_value_pv = document.getElementById('busuanzi_value_site_pv');
+        var busuanziSitePVOffset = parseInt('<%= theme.busuanzi.site_pv.offset %>');
+        if ($$bsz_site_container_pv.ownerDocument.defaultView.getComputedStyle($$bsz_site_container_pv, null).display === 'inline') {
+            clearInterval(int);
+            $$bsz_site_value_pv.innerHTML = parseInt($$bsz_site_value_pv.innerHTML) + busuanziSitePVOffset;
+        }
+        <% } %>
+        <% if (theme.busuanzi.site_uv.offset) { %>
+        var $$bsz_site_container_uv = document.getElementById('busuanzi_container_site_uv');
+        var $$bsz_site_value_uv = document.getElementById('busuanzi_value_site_uv');
+        var busuanziSiteUVOffset = parseInt('<%= theme.busuanzi.site_uv.offset %>');
+        if ($$bsz_site_container_uv.ownerDocument.defaultView.getComputedStyle($$bsz_site_container_uv, null).display === 'inline') {
+            clearInterval(int);
+            $$bsz_site_value_uv.innerHTML = parseInt($$bsz_site_value_uv.innerHTML) + busuanziSiteUVOffset;
+        }
+        <% } %>
+    }
+</script>
+<!-- Busuanzi Post Views -->
+<% if (theme.busuanzi.site_pv.enable) { %>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_pv">本站总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;次</span>
+<% } %>
+<!-- Busuanzi User Views -->
+<% if (theme.busuanzi.site_uv.enable) { %>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">本站访客数&nbsp;<span id="busuanzi_value_site_uv"></span>&nbsp;人</span>
+<% } %>
